@@ -1,4 +1,4 @@
-package com.ArabicDuolingo.Arabic.duolingo.service.auth;
+package com.ArabicDuolingo.Arabic.duolingo.service.user;
 
 import com.ArabicDuolingo.Arabic.duolingo.bo.customUserDetails.CustomUserDetails;
 import com.ArabicDuolingo.Arabic.duolingo.entity.UserEntity;

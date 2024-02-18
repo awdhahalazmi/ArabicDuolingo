@@ -1,9 +1,11 @@
 package com.ArabicDuolingo.Arabic.duolingo.entity;
 
+import org.hibernate.engine.spi.Status;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Bank_users")
+@Table(name = "game_users")
 
 public class UserEntity {
 
@@ -13,16 +15,13 @@ public class UserEntity {
     private Long id;
 
     @Column(name = "name",nullable = false)
-    private java.lang.String name;
+    private String name;
 
     @Column(name = "email",nullable = false)
 
-    private java.lang.String email;
+    private String email;
 
     @Column(name = "role",nullable = false)
-
-
-
 
     @Enumerated(EnumType.STRING)
     @OneToOne
@@ -34,7 +33,18 @@ public class UserEntity {
     private String password;
     @Column(name = "username",nullable = false)
     private String username;
-    public java.lang.String getEmail() {
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getEmail() {
         return email;
     }
 
@@ -52,11 +62,11 @@ public class UserEntity {
         this.id = id;
     }
 
-    public java.lang.String getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(java.lang.String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

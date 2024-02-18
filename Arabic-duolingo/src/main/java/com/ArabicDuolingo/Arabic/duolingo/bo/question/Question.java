@@ -1,7 +1,7 @@
 package com.ArabicDuolingo.Arabic.duolingo.bo.question;
 
 public class Question {
-private Long questionId;
+    private Long questionId;
     private String questionText;
     private String correctAnswerText;
     private String wrongAnswerText;
