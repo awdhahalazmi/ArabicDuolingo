@@ -4,13 +4,15 @@ import javax.persistence.*;
 
 @Entity
 public class ProgressEntity {
+
     @Id
     @Column(name = "id",nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userId;
     private Long lessonId;
-    @Column(name ="score" ,nullable = false)
+    @OneToMany
+    @JoinColumn(name ="score" ,nullable = false)
     private int score;
 
     public Long getId() {

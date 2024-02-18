@@ -11,7 +11,7 @@ public class LessonEntity {
     private Long chapterId;
     private Long questionId;
     @Column(name = "title",nullable = false)
-private String title;
+    private String title;
     @Column(name = "image",nullable = false)
     private String imageUrl;
 

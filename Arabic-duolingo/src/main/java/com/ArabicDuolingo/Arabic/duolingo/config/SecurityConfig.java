@@ -1,6 +1,6 @@
 package com.ArabicDuolingo.Arabic.duolingo.config;
 
-import com.ArabicDuolingo.Arabic.duolingo.service.auth.CustomUserDetailService;
+import com.ArabicDuolingo.Arabic.duolingo.service.user.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

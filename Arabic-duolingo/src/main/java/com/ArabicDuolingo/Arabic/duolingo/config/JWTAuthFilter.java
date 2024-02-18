@@ -1,6 +1,6 @@
 package com.ArabicDuolingo.Arabic.duolingo.config;
 
-import com.ArabicDuolingo.Arabic.duolingo.service.auth.CustomUserDetailService;
+import com.ArabicDuolingo.Arabic.duolingo.service.user.CustomUserDetailService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

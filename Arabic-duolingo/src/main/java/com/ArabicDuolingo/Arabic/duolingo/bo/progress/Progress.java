@@ -1,6 +1,6 @@
 package com.ArabicDuolingo.Arabic.duolingo.bo.progress;
 
-public class Score {
+public class Progress {
     private Long scoreId;
     private int score;
 

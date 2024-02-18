@@ -14,7 +14,7 @@ public class QuestionEntity {
     @Column(name = "correct_Answer_Text",nullable = false)
     private String correctAnswerText;
 
-    @Column(name = "Wrong_Answer_Text",nullable = false)
+    @Column(name = "wrong_Answer_Text",nullable = false)
     private String WrongAnswerText;
 
     public Long getId() {

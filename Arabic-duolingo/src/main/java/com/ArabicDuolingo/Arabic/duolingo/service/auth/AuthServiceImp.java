@@ -10,6 +10,7 @@ import com.ArabicDuolingo.Arabic.duolingo.entity.RoleEntity;
 import com.ArabicDuolingo.Arabic.duolingo.entity.UserEntity;
 import com.ArabicDuolingo.Arabic.duolingo.repository.RoleRepository;
 import com.ArabicDuolingo.Arabic.duolingo.repository.UserRepository;
+import com.ArabicDuolingo.Arabic.duolingo.service.user.CustomUserDetailService;
 import com.ArabicDuolingo.Arabic.duolingo.util.enums.Roles;
 import com.ArabicDuolingo.Arabic.duolingo.util.exceptions.BodyGuardException;
 import com.ArabicDuolingo.Arabic.duolingo.util.exceptions.UserNotFoundException;
@@ -39,7 +40,7 @@ public class AuthServiceImp implements AuthService{
 
     @Override
     public void signup(CreateSignupRequest createSignupRequest) {
-        RoleEntity roleEntity= roleRepository.findRoleEntityByTitle(Roles.user.name())
+        RoleEntity roleEntity= roleRepository.findRoleEntityByTitle(Roles.USER.name())
                 .orElseThrow(() -> new BodyGuardException("no Roles Found"));;
         UserEntity user= new UserEntity();
         user.setName(createSignupRequest.getName());
