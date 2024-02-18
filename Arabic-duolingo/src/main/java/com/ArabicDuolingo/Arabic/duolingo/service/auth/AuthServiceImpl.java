@@ -21,7 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthServiceImp implements AuthService{
+public class AuthServiceImpl implements AuthService{
     private final AuthenticationManager authenticationManager;
     private final CustomUserDetailService userDetailService;
     private final JWTUtil jwtUtil;
@@ -29,7 +29,7 @@ public class AuthServiceImp implements AuthService{
     private  final RoleRepository roleRepository;
     private final UserRepository userRepository;
 
-    public AuthServiceImp(AuthenticationManager authenticationManager, CustomUserDetailService userDetailService, JWTUtil jwtUtil, BCryptPasswordEncoder bCryptPasswordEncoder, RoleRepository roleRepository, UserRepository userRepository) {
+    public AuthServiceImpl(AuthenticationManager authenticationManager, CustomUserDetailService userDetailService, JWTUtil jwtUtil, BCryptPasswordEncoder bCryptPasswordEncoder, RoleRepository roleRepository, UserRepository userRepository) {
         this.authenticationManager = authenticationManager;
         this.userDetailService = userDetailService;
         this.jwtUtil = jwtUtil;

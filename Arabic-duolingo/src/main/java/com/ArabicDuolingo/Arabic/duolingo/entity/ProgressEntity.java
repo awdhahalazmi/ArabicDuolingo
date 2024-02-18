@@ -3,17 +3,25 @@ package com.ArabicDuolingo.Arabic.duolingo.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "progress")
 public class ProgressEntity {
 
     @Id
     @Column(name = "id",nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId;
-    private Long lessonId;
-    @OneToMany
-    @JoinColumn(name ="score" ,nullable = false)
-    private int score;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity userId;
+
+    @OneToOne
+    @JoinColumn(name = "chapter_id")
+    private ChapterEntity chapterEntity;
+
+    @OneToOne
+    @JoinColumn(name = "lesson_id")
+    private LessonEntity lessonEntity;
 
     public Long getId() {
         return id;
@@ -23,27 +31,27 @@ public class ProgressEntity {
         this.id = id;
     }
 
-    public Long getUserId() {
+    public UserEntity getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(UserEntity userId) {
         this.userId = userId;
     }
 
-    public Long getLessonId() {
-        return lessonId;
+    public ChapterEntity getChapterEntity() {
+        return chapterEntity;
     }
 
-    public void setLessonId(Long lessonId) {
-        this.lessonId = lessonId;
+    public void setChapterEntity(ChapterEntity chapterEntity) {
+        this.chapterEntity = chapterEntity;
     }
 
-    public int getScore() {
-        return score;
+    public LessonEntity getLessonEntity() {
+        return lessonEntity;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setLessonEntity(LessonEntity lessonEntity) {
+        this.lessonEntity = lessonEntity;
     }
 }

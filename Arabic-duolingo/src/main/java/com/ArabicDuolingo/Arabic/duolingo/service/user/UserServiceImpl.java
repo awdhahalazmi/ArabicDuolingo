@@ -5,10 +5,12 @@ import com.ArabicDuolingo.Arabic.duolingo.bo.user.UpdateUserStatusRequest;
 import com.ArabicDuolingo.Arabic.duolingo.entity.UserEntity;
 import com.ArabicDuolingo.Arabic.duolingo.repository.UserRepository;
 import org.hibernate.engine.spi.Status;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
 
@@ -20,7 +22,6 @@ public class UserServiceImpl implements UserService{
         UserEntity userEntity= new UserEntity();
         userEntity.setName(createUserRequest.getName());
         userEntity.setEmail(createUserRequest.getEmail());
-        userEntity.setStatus(Status.valueOf(createUserRequest.getStatus()));
         userRepository.save(userEntity);
 
     }
@@ -31,16 +32,11 @@ public class UserServiceImpl implements UserService{
         if (!updateUserStatusRequest.getStatus().equals("ACTIVE") && !updateUserStatusRequest.getStatus().equals("INACTIVE")){
             throw new IllegalArgumentException("Error. The status must be either ACTIVE or INACTIVE");
         }
-        userEntity.setStatus(Status.valueOf(updateUserStatusRequest.getStatus()));
         userRepository.save(userEntity);
     }
 
     @Override
-    public List<String> getAllUsers() {
-        return userRepository.findAll()
-                .stream()
-                .filter(e -> e.getPassword().length() >8)
-                .map(UserEntity ::getName)
-                .collect(Collectors.toList());
+    public List<UserEntity> getAllUsers() {
+        return userRepository.findAll();
     }
 }

@@ -3,6 +3,7 @@ package com.ArabicDuolingo.Arabic.duolingo.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "question")
 public class QuestionEntity {
     @Id
     @Column(name = "id",nullable = false)
@@ -16,6 +17,10 @@ public class QuestionEntity {
 
     @Column(name = "wrong_Answer_Text",nullable = false)
     private String WrongAnswerText;
+
+    @ManyToOne
+    @JoinColumn(name = "lesson_id")
+    private LessonEntity lessonEntity;
 
     public Long getId() {
         return id;
@@ -47,5 +52,13 @@ public class QuestionEntity {
 
     public void setWrongAnswerText(String wrongAnswerText) {
         WrongAnswerText = wrongAnswerText;
+    }
+
+    public LessonEntity getLessonEntity() {
+        return lessonEntity;
+    }
+
+    public void setLessonEntity(LessonEntity lessonEntity) {
+        this.lessonEntity = lessonEntity;
     }
 }

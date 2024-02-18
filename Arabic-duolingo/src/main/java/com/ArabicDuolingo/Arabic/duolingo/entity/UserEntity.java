@@ -10,39 +10,25 @@ import javax.persistence.*;
 public class UserEntity {
 
     @Id
-    @Column(name = "id",nullable = false)
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "email",nullable = false)
-
+    @Column(name = "email", nullable = false)
     private String email;
-
-    @Column(name = "role",nullable = false)
-
-    @Enumerated(EnumType.STRING)
-    @OneToOne
-    @JoinColumn(name = "role_id")
-    private RoleEntity role;
-
 
     @Column(nullable = false)
     private String password;
-    @Column(name = "username",nullable = false)
+    @Column(name = "username", nullable = false)
     private String username;
-    @Enumerated(EnumType.STRING)
-    private Status status;
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
+    //@Column(name = "role", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "role_id")
+    private RoleEntity role;
 
     public String getEmail() {
         return email;
@@ -51,7 +37,6 @@ public class UserEntity {
     public void setEmail(java.lang.String email) {
         this.email = email;
     }
-
 
 
     public Long getId() {
@@ -69,7 +54,6 @@ public class UserEntity {
     public void setName(String name) {
         this.name = name;
     }
-
 
 
     public String getPassword() {

@@ -1,17 +1,16 @@
 package com.ArabicDuolingo.Arabic.duolingo.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
+@Table(name = "chapter")
 public class ChapterEntity {
     @Id
-    @Column(name = "id",nullable = false)
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long lessonId;
 
-    @Column(name = "image",nullable = false)
+    @Column(name = "image", nullable = false)
     private String imageUrl;
 
 
@@ -23,16 +22,6 @@ public class ChapterEntity {
         this.id = id;
     }
 
-    public Long getLessonId() {
-        return lessonId;
-    }
-
-    public void setLessonId(Long lessonId) {
-        this.lessonId = lessonId;
-    }
-
-
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -40,4 +29,5 @@ public class ChapterEntity {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
 }

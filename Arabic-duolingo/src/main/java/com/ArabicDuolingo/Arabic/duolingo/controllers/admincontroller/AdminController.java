@@ -1,5 +1,6 @@
 package com.ArabicDuolingo.Arabic.duolingo.controllers.admincontroller;
 
+import com.ArabicDuolingo.Arabic.duolingo.entity.UserEntity;
 import com.ArabicDuolingo.Arabic.duolingo.service.user.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +18,8 @@ public class AdminController {
         this.userService = userService;
     }
     @GetMapping("/users")
-    public ResponseEntity<List<String>> getAllUsers(){
-        List<String> users= userService.getAllUsers();
+    public ResponseEntity<List<UserEntity>> getAllUsers(){
+        List<UserEntity> users= userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 }

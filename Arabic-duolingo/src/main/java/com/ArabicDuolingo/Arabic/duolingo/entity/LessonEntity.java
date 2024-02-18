@@ -8,12 +8,16 @@ public class LessonEntity {
     @Column(name = "id",nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long chapterId;
-    private Long questionId;
     @Column(name = "title",nullable = false)
     private String title;
     @Column(name = "image",nullable = false)
     private String imageUrl;
+
+    @ManyToOne
+    @JoinColumn(name = "chapter")
+    private ChapterEntity chapter;
+
+
 
     public Long getId() {
         return id;
@@ -21,22 +25,6 @@ public class LessonEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getChapterId() {
-        return chapterId;
-    }
-
-    public void setChapterId(Long chapterId) {
-        this.chapterId = chapterId;
-    }
-
-    public Long getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(Long questionId) {
-        this.questionId = questionId;
     }
 
     public String getTitle() {
@@ -54,4 +42,13 @@ public class LessonEntity {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    public ChapterEntity getChapter() {
+        return chapter;
+    }
+
+    public void setChapter(ChapterEntity chapter) {
+        this.chapter = chapter;
+    }
+
 }
