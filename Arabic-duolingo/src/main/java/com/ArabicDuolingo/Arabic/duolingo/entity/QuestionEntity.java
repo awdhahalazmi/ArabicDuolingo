@@ -15,9 +15,6 @@ public class QuestionEntity {
     @Column(name = "correct_Answer_Text",nullable = false)
     private String correctAnswerText;
 
-    @Column(name = "wrong_Answer_Text",nullable = false)
-    private String WrongAnswerText;
-
     @ManyToOne
     @JoinColumn(name = "lesson_id")
     private LessonEntity lessonEntity;
@@ -44,14 +41,6 @@ public class QuestionEntity {
 
     public void setCorrectAnswerText(String correctAnswerText) {
         this.correctAnswerText = correctAnswerText;
-    }
-
-    public String getWrongAnswerText() {
-        return WrongAnswerText;
-    }
-
-    public void setWrongAnswerText(String wrongAnswerText) {
-        WrongAnswerText = wrongAnswerText;
     }
 
     public LessonEntity getLessonEntity() {

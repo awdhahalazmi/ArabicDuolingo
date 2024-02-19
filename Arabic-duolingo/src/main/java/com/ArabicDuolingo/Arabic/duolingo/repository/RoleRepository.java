@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface RoleRepository extends JpaRepository<RoleEntity,Long> {
     // RoleEntity findByType(Roles title);
-    @Query(value = "SELECT * FROM role r where r.title= : title",nativeQuery = true)
+    @Query(value = "SELECT * FROM role r where r.title= :title",nativeQuery = true)
     Optional<RoleEntity> findRoleEntityByTitle(String title);
 }

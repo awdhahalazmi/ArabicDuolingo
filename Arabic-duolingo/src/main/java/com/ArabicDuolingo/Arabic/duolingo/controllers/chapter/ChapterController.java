@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/chapters")
+@RequestMapping("/api/v1/chapter")
 public class ChapterController {
     private final ChapterService chapterService;
 
@@ -18,7 +18,7 @@ public class ChapterController {
     public ChapterController(ChapterService chapterService) {
         this.chapterService = chapterService;
     }
-    @GetMapping()
+    @GetMapping("/chapters")
     public ResponseEntity<List<ChapterEntity>> getAllChapters(){
         List<ChapterEntity> chapterEntities = chapterService.getAllChapters();
         return ResponseEntity.ok(chapterEntities);

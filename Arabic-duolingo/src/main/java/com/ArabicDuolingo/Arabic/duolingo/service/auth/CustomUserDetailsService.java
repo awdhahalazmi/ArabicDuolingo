@@ -1,4 +1,4 @@
-package com.ArabicDuolingo.Arabic.duolingo.service.user;
+package com.ArabicDuolingo.Arabic.duolingo.service.auth;
 
 import com.ArabicDuolingo.Arabic.duolingo.bo.customUserDetails.CustomUserDetails;
 import com.ArabicDuolingo.Arabic.duolingo.entity.UserEntity;
@@ -9,11 +9,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomUserDetailService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
+
     private final UserRepository userRepository;
 
-
-    public CustomUserDetailService(UserRepository userRepository) {
+    public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -25,10 +25,11 @@ public class CustomUserDetailService implements UserDetailsService {
             throw new RuntimeException(e);
         }
     }
+
     private CustomUserDetails buildCustomUserDetailsOfUsername(String username) throws NotFoundException {
-        UserEntity user = userRepository.findByUsername(username)
+        UserEntity user=userRepository.findByUsername(username)
                 .orElseThrow();
-        if(user == null ){
+        if (user == null){
             throw new NotFoundException("User not found");
         }
         CustomUserDetails userDetails = new CustomUserDetails();
@@ -37,9 +38,6 @@ public class CustomUserDetailService implements UserDetailsService {
         userDetails.setPassword(user.getPassword());
         userDetails.setRole(user.getRole().getTitle().name());
 
-
         return userDetails;
     }
 }
-
-

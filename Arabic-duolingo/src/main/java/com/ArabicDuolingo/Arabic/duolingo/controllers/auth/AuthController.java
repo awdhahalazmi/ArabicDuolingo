@@ -1,4 +1,4 @@
-package com.ArabicDuolingo.Arabic.duolingo.controllers.authcontroller;
+package com.ArabicDuolingo.Arabic.duolingo.controllers.auth;
 
 import com.ArabicDuolingo.Arabic.duolingo.bo.auth.AuthenticationResponse;
 import com.ArabicDuolingo.Arabic.duolingo.bo.auth.CreateLoginRequest;

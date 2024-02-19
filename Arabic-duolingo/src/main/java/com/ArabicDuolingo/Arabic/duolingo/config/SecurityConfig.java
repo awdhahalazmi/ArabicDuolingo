@@ -1,6 +1,6 @@
 package com.ArabicDuolingo.Arabic.duolingo.config;
 
-import com.ArabicDuolingo.Arabic.duolingo.service.user.CustomUserDetailService;
+import com.ArabicDuolingo.Arabic.duolingo.service.auth.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,18 +23,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public static final  String AUTH_PATH= "/api/v1/auth/**";
     public static final String USER_PATH = "/api/v1/user/**";
     public static final String ADMIN_PATH= "/api/v1/admin/**";
+    public static final String QUESTION_PATH= "/api/v1/question/**";
+    public static final String CHAPTER_PATH= "/api/v1/chapter/**";
 
-    private static final List<String> ALLOWED_METHODS= Arrays.asList("GET","PUT","POST","DELETE","OPTIONS","PATCH");
-    private static final List<String> ALLOWED_HEADERS= Arrays.asList("x-request-with","authorization","Content-Type",
-            "Authorization","credential","X-XSRF-TOKEN",
-            "X-Refresh-TOKEN","X-Client-Id","X-client-id");
+    private static final List<String> ALLOWED_METHODS = Arrays.asList("GET", "PUT", "POST", "DELETE", "OPTIONS", "PATCH");
+    private static final List<String> ALLOWED_HEADERS = Arrays.asList("x-requested-with", "authorization", "Content-Type",
+            "Authorization", "credential", "X-XSRF-TOKEN", "X-Refresh-Token", "X-Client-Id", "x-client-id");
+
     @Autowired
     private JWTUtil jwtUtil;
+
     @Autowired
-    private CustomUserDetailService userDetailService;
+    private CustomUserDetailsService userDetailsService;
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .exceptionHandling()
                 .and()
@@ -47,26 +50,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(AUTH_PATH).permitAll()
+                .antMatchers(CHAPTER_PATH).hasAuthority("user")
                 .antMatchers(USER_PATH).hasAuthority("user")
                 .antMatchers(ADMIN_PATH).hasAuthority("admin")
+                .antMatchers(QUESTION_PATH).hasAuthority("admin")
                 .anyRequest().authenticated();
-        http.addFilterBefore(new JWTAuthFilter(jwtUtil,userDetailService), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new JWTAuthFilter(jwtUtil,userDetailsService), UsernamePasswordAuthenticationFilter.class);
+
     }
+
     private CorsConfiguration getCorsConfiguration(){
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedHeaders(ALLOWED_HEADERS);
         corsConfiguration.setAllowedMethods(ALLOWED_METHODS);
         corsConfiguration.setAllowedOriginPatterns(Collections.singletonList("*"));
         corsConfiguration.setAllowCredentials(true);
-        return corsConfiguration;
 
+        return corsConfiguration;
     }
 
-    @Override
     @Bean
+    @Override
     protected AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();

@@ -1,10 +1,9 @@
 package com.ArabicDuolingo.Arabic.duolingo.bo.question;
 
-public class Question {
-    private Long questionId;
+public class CreateQuestionRequest {
+    private Long lessonId;
     private String questionText;
     private String correctAnswerText;
-    private String wrongAnswerText;
 
     public String getQuestionText() {
         return questionText;
@@ -22,19 +21,11 @@ public class Question {
         this.correctAnswerText = correctAnswerText;
     }
 
-    public String getWrongAnswerText() {
-        return wrongAnswerText;
+    public Long getLessonId() {
+        return lessonId;
     }
 
-    public void setWrongAnswerText(String wrongAnswerText) {
-        this.wrongAnswerText = wrongAnswerText;
-    }
-
-    public Long getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(Long questionId) {
-        this.questionId = questionId;
+    public void setLessonId(Long lessonId) {
+        this.lessonId = lessonId;
     }
 }

@@ -10,7 +10,6 @@ import com.ArabicDuolingo.Arabic.duolingo.entity.RoleEntity;
 import com.ArabicDuolingo.Arabic.duolingo.entity.UserEntity;
 import com.ArabicDuolingo.Arabic.duolingo.repository.RoleRepository;
 import com.ArabicDuolingo.Arabic.duolingo.repository.UserRepository;
-import com.ArabicDuolingo.Arabic.duolingo.service.user.CustomUserDetailService;
 import com.ArabicDuolingo.Arabic.duolingo.util.enums.Roles;
 import com.ArabicDuolingo.Arabic.duolingo.util.exceptions.BodyGuardException;
 import com.ArabicDuolingo.Arabic.duolingo.util.exceptions.UserNotFoundException;
@@ -23,13 +22,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthServiceImpl implements AuthService{
     private final AuthenticationManager authenticationManager;
-    private final CustomUserDetailService userDetailService;
+    private final CustomUserDetailsService userDetailService;
     private final JWTUtil jwtUtil;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private  final RoleRepository roleRepository;
     private final UserRepository userRepository;
 
-    public AuthServiceImpl(AuthenticationManager authenticationManager, CustomUserDetailService userDetailService, JWTUtil jwtUtil, BCryptPasswordEncoder bCryptPasswordEncoder, RoleRepository roleRepository, UserRepository userRepository) {
+    public AuthServiceImpl(AuthenticationManager authenticationManager, CustomUserDetailsService userDetailService, JWTUtil jwtUtil, BCryptPasswordEncoder bCryptPasswordEncoder, RoleRepository roleRepository, UserRepository userRepository) {
         this.authenticationManager = authenticationManager;
         this.userDetailService = userDetailService;
         this.jwtUtil = jwtUtil;
@@ -40,7 +39,7 @@ public class AuthServiceImpl implements AuthService{
 
     @Override
     public void signup(CreateSignupRequest createSignupRequest) {
-        RoleEntity roleEntity= roleRepository.findRoleEntityByTitle(Roles.USER.name())
+        RoleEntity roleEntity= roleRepository.findRoleEntityByTitle(Roles.user.name())
                 .orElseThrow(() -> new BodyGuardException("no Roles Found"));;
         UserEntity user= new UserEntity();
         user.setName(createSignupRequest.getName());
@@ -65,7 +64,7 @@ public class AuthServiceImpl implements AuthService{
         response.setId(userDetails.getId());
         response.setUsername(userDetails.getUsername());
         response.setRole(userDetails.getRole());
-        response.setToken("Bearer"+ accessToken);
+        response.setToken("Bearer "+ accessToken);
         return response;
 
 

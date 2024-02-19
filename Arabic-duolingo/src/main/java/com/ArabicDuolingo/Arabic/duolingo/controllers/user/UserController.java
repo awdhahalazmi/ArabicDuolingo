@@ -1,4 +1,4 @@
-package com.ArabicDuolingo.Arabic.duolingo.controllers.usercontroller;
+package com.ArabicDuolingo.Arabic.duolingo.controllers.user;
 
 import com.ArabicDuolingo.Arabic.duolingo.bo.user.CreateUserRequest;
 import com.ArabicDuolingo.Arabic.duolingo.bo.user.UpdateUserStatusRequest;

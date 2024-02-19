@@ -1,6 +1,5 @@
 package com.ArabicDuolingo.Arabic.duolingo.util.enums;
 
 public enum Roles {
-    USER, ADMIN
-
+    user, admin
 }

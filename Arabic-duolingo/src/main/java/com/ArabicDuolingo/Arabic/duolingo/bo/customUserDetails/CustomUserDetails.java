@@ -15,9 +15,6 @@ public class CustomUserDetails implements UserDetails {
     private String password;
 
     private String role;
-    public String getRole() {
-        return role;
-    }
 
     public Long getId() {
         return id;
@@ -35,17 +32,23 @@ public class CustomUserDetails implements UserDetails {
         this.userName = userName;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
 
     public void setRole(String role) {
         this.role = role;
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(role));
     }
-    public void setPassword(String password) {
-        this.password = password;
-    }
+
     @Override
     public String getPassword() {
         return password;
@@ -75,16 +78,16 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
     public Map<String, Object> getClaims(){
         HashMap<String, Object> claims = new HashMap<>();
 
-        claims.put("id", this.id);
+        claims.put("id",this.id);
         claims.put("userName", this.userName);
         claims.put("role", role);
+
         return claims;
     }
-
-
 
 }
 

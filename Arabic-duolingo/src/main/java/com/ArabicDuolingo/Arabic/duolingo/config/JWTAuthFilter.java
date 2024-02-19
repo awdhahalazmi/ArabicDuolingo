@@ -1,11 +1,11 @@
 package com.ArabicDuolingo.Arabic.duolingo.config;
 
-import com.ArabicDuolingo.Arabic.duolingo.service.user.CustomUserDetailService;
+import com.ArabicDuolingo.Arabic.duolingo.service.auth.CustomUserDetailsService;
+import com.ArabicDuolingo.Arabic.duolingo.util.exceptions.UserNotFoundException;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -15,39 +15,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.ArabicDuolingo.Arabic.duolingo.config.SecurityConfig.AUTH_PATH;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Configuration
 public class JWTAuthFilter extends OncePerRequestFilter {
     private static final String BEARER = "Bearer ";
+
     private final JWTUtil jwtUtil;
 
-    private final CustomUserDetailService userDetailService;
+    private final CustomUserDetailsService userDetailsService;
 
-    public JWTAuthFilter(JWTUtil jwtUtil, CustomUserDetailService userDetailService) {
+    public JWTAuthFilter(JWTUtil jwtUtil, CustomUserDetailsService userDetailsService) {
         this.jwtUtil = jwtUtil;
-        this.userDetailService = userDetailService;
+        this.userDetailsService = userDetailsService;
     }
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain)
-            throws ServletException, IOException {
 
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);
-        if(!request.getServletPath().equals("/api/v1/login")
-                && authorizationHeader
-                != null && authorizationHeader.startsWith(BEARER)){
+        if(!request.getServletPath().equals(AUTH_PATH + "/login") && authorizationHeader != null && authorizationHeader.startsWith(BEARER)){
             String token = authorizationHeader.substring(7);
             if(jwtUtil.isTokenValid(token)){
-                String username = jwtUtil.getUsernameFromToken(token);
-                if (username == null){
-                    throw  new UsernameNotFoundException("user not found");
+                String usernmae = jwtUtil.getUsernameFromToken(token);
+                if (usernmae == null){
+                    throw new UserNotFoundException("user not found");
                 }
-                UserDetails userDetails = userDetailService.loadUserByUsername(username);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(usernmae);
+
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
-                authentication.setDetails(new WebAuthenticationDetailsSource());
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }

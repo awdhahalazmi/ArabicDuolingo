@@ -1,4 +1,4 @@
-package com.ArabicDuolingo.Arabic.duolingo.controllers.admincontroller;
+package com.ArabicDuolingo.Arabic.duolingo.controllers.admin;
 
 import com.ArabicDuolingo.Arabic.duolingo.entity.UserEntity;
 import com.ArabicDuolingo.Arabic.duolingo.service.user.UserService;
