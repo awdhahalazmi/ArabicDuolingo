@@ -22,6 +22,10 @@ public class ProgressEntity {
     @OneToOne
     @JoinColumn(name = "lesson_id")
     private LessonEntity lessonEntity;
+    @OneToOne
+    @JoinColumn(name = "question_id")
+    private QuestionEntity questionEntity;
+
 
     @Column(name = "score")
     private Long score;
@@ -64,5 +68,13 @@ public class ProgressEntity {
 
     public void setScore(Long score) {
         this.score = score;
+    }
+
+    public QuestionEntity getQuestionEntity() {
+        return questionEntity;
+    }
+
+    public void setQuestionEntity(QuestionEntity questionEntity) {
+        this.questionEntity = questionEntity;
     }
 }

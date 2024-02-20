@@ -27,6 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String USER_QUESTION_PATH= "/api/v1/admin/question/**";
     public static final String CHAPTER_PATH= "/api/v1/chapter/**";
     public static final String Lesson_PATH= "/api/v1/lesson/**";
+    public static final String PROGRESS_PATH= "/api/v1/progress/**";
+
 
     private static final List<String> ALLOWED_METHODS = Arrays.asList("GET", "PUT", "POST", "DELETE", "OPTIONS", "PATCH");
     private static final List<String> ALLOWED_HEADERS = Arrays.asList("x-requested-with", "authorization", "Content-Type",
@@ -58,6 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(ADMIN_PATH).hasAuthority("admin")
                 .antMatchers(ADMIN_QUESTION_PATH).hasAuthority("admin")
                 .antMatchers(USER_QUESTION_PATH).hasAuthority("user")
+                .antMatchers(PROGRESS_PATH).hasAuthority("user")
+
 
                 .anyRequest().authenticated();
         http.addFilterBefore(new JWTAuthFilter(jwtUtil,userDetailsService), UsernamePasswordAuthenticationFilter.class);

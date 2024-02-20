@@ -1,7 +1,7 @@
 package com.ArabicDuolingo.Arabic.duolingo.bo.progress;
 
 public class Progress {
-    private Long scoreId;
+    private Long questionId;
     private Long chapterId;
     private Long lessonId;
     private Long userId;
@@ -40,5 +40,13 @@ public class Progress {
 
     public void setScore(Long score) {
         this.score = score;
+    }
+
+    public Long getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
     }
 }

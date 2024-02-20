@@ -9,7 +9,5 @@ import java.util.List;
 @Repository
 
 public interface ProgressRepository extends JpaRepository<ProgressEntity,Long> {
-//   List<ProgressEntity> findAllByChapterId(Long chapterId);
-//
-//   List<ProgressEntity> findAllByChapterEntityId(Long chapterId);
+
 }
