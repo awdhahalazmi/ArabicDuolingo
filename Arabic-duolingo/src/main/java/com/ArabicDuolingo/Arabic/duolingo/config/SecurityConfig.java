@@ -23,8 +23,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public static final  String AUTH_PATH= "/api/v1/auth/**";
     public static final String USER_PATH = "/api/v1/user/**";
     public static final String ADMIN_PATH= "/api/v1/admin/**";
-    public static final String QUESTION_PATH= "/api/v1/question/**";
+    public static final String ADMIN_QUESTION_PATH= "/api/v1/admin/question/**";
+    public static final String USER_QUESTION_PATH= "/api/v1/admin/question/**";
     public static final String CHAPTER_PATH= "/api/v1/chapter/**";
+    public static final String Lesson_PATH= "/api/v1/lesson/**";
 
     private static final List<String> ALLOWED_METHODS = Arrays.asList("GET", "PUT", "POST", "DELETE", "OPTIONS", "PATCH");
     private static final List<String> ALLOWED_HEADERS = Arrays.asList("x-requested-with", "authorization", "Content-Type",
@@ -51,9 +53,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(AUTH_PATH).permitAll()
                 .antMatchers(CHAPTER_PATH).hasAuthority("user")
+                .antMatchers(Lesson_PATH).hasAuthority("user")
                 .antMatchers(USER_PATH).hasAuthority("user")
                 .antMatchers(ADMIN_PATH).hasAuthority("admin")
-                .antMatchers(QUESTION_PATH).hasAuthority("admin")
+                .antMatchers(ADMIN_QUESTION_PATH).hasAuthority("admin")
+                .antMatchers(USER_QUESTION_PATH).hasAuthority("user")
+
                 .anyRequest().authenticated();
         http.addFilterBefore(new JWTAuthFilter(jwtUtil,userDetailsService), UsernamePasswordAuthenticationFilter.class);
 

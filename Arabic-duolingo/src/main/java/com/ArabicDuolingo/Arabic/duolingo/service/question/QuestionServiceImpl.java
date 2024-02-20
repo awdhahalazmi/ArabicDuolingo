@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,6 +33,14 @@ public class QuestionServiceImpl implements QuestionService {
         questionRepository.saveAll(questionEntities);
     }
 
+    @Override
+    public List<QuestionEntity> getAllQuestionsAndAnswers(Long chapterId, Long lessonId) {
+        return questionRepository.findAll()
+                .stream()
+                .filter(question -> chapterId == null || Objects.equals(question.getLessonEntity().getChapter().getId(), chapterId))
+                .filter(question -> lessonId == null || Objects.equals(question.getLessonEntity().getId(), lessonId))
+                .collect(Collectors.toList());
+    }
     private QuestionEntity mapToQuestionEntity(CreateQuestionRequest request) {
         QuestionEntity questionEntity = new QuestionEntity();
         questionEntity.setQuestionText(request.getQuestionText());

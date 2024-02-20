@@ -23,6 +23,9 @@ public class ProgressEntity {
     @JoinColumn(name = "lesson_id")
     private LessonEntity lessonEntity;
 
+    @Column(name = "score")
+    private Long score;
+
     public Long getId() {
         return id;
     }
@@ -53,5 +56,13 @@ public class ProgressEntity {
 
     public void setLessonEntity(LessonEntity lessonEntity) {
         this.lessonEntity = lessonEntity;
+    }
+
+    public Long getScore() {
+        return score;
+    }
+
+    public void setScore(Long score) {
+        this.score = score;
     }
 }
