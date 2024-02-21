@@ -4,6 +4,8 @@ public class CreateQuestionRequest {
     private Long lessonId;
     private String questionText;
     private String correctAnswerText;
+    private String firstOption;
+    private String secondOption;
 
     public String getQuestionText() {
         return questionText;
@@ -27,5 +29,21 @@ public class CreateQuestionRequest {
 
     public void setLessonId(Long lessonId) {
         this.lessonId = lessonId;
+    }
+
+    public String getFirstOption() {
+        return firstOption;
+    }
+
+    public void setFirstOption(String firstOption) {
+        this.firstOption = firstOption;
+    }
+
+    public String getSecondOption() {
+        return secondOption;
+    }
+
+    public void setSecondOption(String secondOption) {
+        this.secondOption = secondOption;
     }
 }

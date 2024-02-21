@@ -45,6 +45,8 @@ public class QuestionServiceImpl implements QuestionService {
         QuestionEntity questionEntity = new QuestionEntity();
         questionEntity.setQuestionText(request.getQuestionText());
         questionEntity.setCorrectAnswerText(request.getCorrectAnswerText());
+        questionEntity.setFirstOption(request.getFirstOption());
+        questionEntity.setSecondOption(request.getSecondOption());
         LessonEntity lessonEntity = lessonRepository.findById(request.getLessonId())
                 .orElseThrow(() -> new EntityNotFoundException("Lesson not found"));
         questionEntity.setLessonEntity(lessonEntity);

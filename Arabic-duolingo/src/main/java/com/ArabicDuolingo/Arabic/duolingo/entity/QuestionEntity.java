@@ -14,6 +14,10 @@ public class QuestionEntity {
 
     @Column(name = "correct_Answer_Text",nullable = false)
     private String correctAnswerText;
+    @Column(name = "first_options",nullable = false)
+    private String firstOption;
+    @Column(name = "second_options",nullable = false)
+    private String secondOption;
 
     @ManyToOne
     @JoinColumn(name = "lesson_id")
@@ -49,5 +53,21 @@ public class QuestionEntity {
 
     public void setLessonEntity(LessonEntity lessonEntity) {
         this.lessonEntity = lessonEntity;
+    }
+
+    public String getFirstOption() {
+        return firstOption;
+    }
+
+    public void setFirstOption(String firstOption) {
+        this.firstOption = firstOption;
+    }
+
+    public String getSecondOption() {
+        return secondOption;
+    }
+
+    public void setSecondOption(String secondOption) {
+        this.secondOption = secondOption;
     }
 }
